@@ -4,7 +4,7 @@ import { marked } from "marked";
 import BarraFerramentas from "./components/BarraFerramentas";
 
 function App() {
-  const [text, setText] = useState("###Hello word!!!");
+  const [text, setText] = useState( localStorage.getItem("markdownText") || "###Hello word!!!");
 
   //função responsável por transformar em html.
   const renderText = () => {
@@ -12,6 +12,11 @@ function App() {
   };
 
   const textAreaRef = useRef(null);
+
+  //salvando conteudo no localstorage
+  useEffect(() => {
+    localStorage.setItem("markdownText", text);
+  }, [text]);
 
   return (
     <div className="app-container">
